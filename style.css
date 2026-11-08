@@ -1,0 +1,255 @@
+/* ==========================================================
+   Coding Conf - Main Stylesheet
+   Sections: variables, base, layout, components, ticket, responsive
+   ========================================================== */
+
+/* ---------- 1. CSS custom properties ---------- */
+:root {
+  --bg-dark: #12002b;
+  --bg-mid: #2a0a5e;
+  --text: #f4eeff;
+  --text-muted: #c4b5e8;
+  --accent-1: #ff7ad9;
+  --accent-2: #7a6bff;
+  --error: #ff9aa8;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --radius: 1rem;
+  --gap: clamp(1rem, 3vw, 2rem);
+
+  /* Fluid typography */
+  --fs-body: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+  --fs-h1: clamp(2rem, 1.2rem + 4vw, 4rem);
+  --fs-h2: clamp(1.4rem, 1rem + 2vw, 2.2rem);
+}
+
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text);
+  background: radial-gradient(circle at 20% 10%, var(--bg-mid), var(--bg-dark) 70%) fixed;
+}
+
+main { flex: 1; padding: var(--gap); }
+
+/* Modern selectors: one rule styles all headings */
+:is(h1, h2, h3) { line-height: 1.2; margin-top: 0; }
+h1 { font-size: var(--fs-h1); }
+:is(.section-title, .ticket-brand h2) { font-size: var(--fs-h2); }
+
+/* :where() keeps specificity at zero so components can override easily */
+:where(ul) { list-style: none; padding: 0; margin: 0; }
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lead { color: var(--text-muted); max-width: 40rem; margin-inline: auto; }
+
+/* ---------- 3. Accessibility helpers ---------- */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  background: #fff;
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  z-index: 10;
+}
+.skip-link:focus { top: 1rem; }
+
+/* Visible focus for every interactive element */
+:is(a, button, input):focus-visible {
+  outline: 3px solid #ffe066;
+  outline-offset: 3px;
+}
+
+/* ---------- 4. Header, nav, footer ---------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem var(--gap);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.site-header nav ul { display: flex; gap: 1.25rem; }
+
+/* Links: single rule using :is() and :not() */
+:is(.site-header, .site-footer, .ticket) a:not(.btn) {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+:is(.site-header, .ticket) a:not(.btn):hover { color: var(--accent-1); }
+.site-header a[aria-current="page"] { text-decoration: underline; }
+
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ---------- 5. Landing page ---------- */
+.hero {
+  text-align: center;
+  padding-block: clamp(2rem, 8vw, 5rem);
+  animation: fadeUp 0.8s ease both;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent-1);
+  font-size: 0.85rem;
+}
+
+.meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 2rem;
+  margin: 1.5rem 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255, 122, 217, 0.4); }
+
+.cards { max-width: 70rem; margin-inline: auto; }
+.section-title { text-align: center; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--gap);
+}
+
+/* Glass look shared by cards, forms and the ticket */
+:is(.card, #regForm, .ticket) {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.card { padding: 1.5rem; transition: transform 0.3s; }
+.card:hover { transform: translateY(-6px); }
+
+/* ---------- 6. Form ---------- */
+.form-section { max-width: 34rem; margin-inline: auto; text-align: center; }
+
+#regForm { padding: var(--gap); text-align: left; }
+
+.field { margin-bottom: 1.25rem; }
+.field label { display: block; margin-bottom: 0.4rem; font-weight: 600; }
+
+.field input {
+  width: 100%;
+  padding: 0.7rem;
+  font: inherit;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.5rem;
+}
+
+/* Highlight an invalid field using :has() on its wrapper */
+.field:has(.error:not(:empty)) input { border-color: var(--error); }
+
+.error { min-height: 1.2em; margin: 0.3rem 0 0; color: var(--error); font-size: 0.9rem; }
+
+/* ---------- 7. Ticket ---------- */
+.ticket-section { text-align: center; }
+
+.ticket {
+  position: relative;              /* anchor for the absolute serial number */
+  max-width: 32rem;
+  margin: 2rem auto 0;
+  padding: 2rem;
+  text-align: left;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  animation: fadeUp 0.8s ease both;
+}
+
+.serial {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.ticket-brand { display: flex; align-items: center; gap: 1rem; }
+.ticket-brand h2 { margin: 0; }
+.ticket-brand p { margin: 0; color: var(--text-muted); }
+
+.ticket-body {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--glass-border);
+}
+.ticket-body::after { content: ""; display: block; clear: both; }  /* clear the float */
+
+.avatar {
+  float: left;                     /* float used to place the avatar beside the text */
+  margin-right: 1.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--glass-border);
+}
+
+.attendee { margin: 0.5rem 0 0; font-size: 1.3rem; font-weight: 700; }
+
+/* ---------- 8. Animation ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---------- 9. Responsive ---------- */
+@media (max-width: 480px) {
+  .site-header { justify-content: center; }
+  .ticket { padding: 1.25rem; }
+  .avatar { float: none; display: block; margin: 0 auto 1rem; }
+  .attendee, #ticketGithub { text-align: center; display: block; }
+}

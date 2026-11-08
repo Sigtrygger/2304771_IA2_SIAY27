@@ -1,9 +1,3 @@
-/* ==========================================================
-   Coding Conf - Main Stylesheet
-   Sections: variables, base, layout, components, ticket, responsive
-   ========================================================== */
-
-/* ---------- 1. CSS custom properties ---------- */
 :root {
   --bg-dark: #12002b;
   --bg-mid: #2a0a5e;
@@ -17,13 +11,11 @@
   --radius: 1rem;
   --gap: clamp(1rem, 3vw, 2rem);
 
-  /* Fluid typography */
   --fs-body: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
   --fs-h1: clamp(2rem, 1.2rem + 4vw, 4rem);
   --fs-h2: clamp(1.4rem, 1rem + 2vw, 2.2rem);
 }
 
-/* ---------- 2. Base ---------- */
 * { box-sizing: border-box; }
 
 body {
@@ -40,12 +32,10 @@ body {
 
 main { flex: 1; padding: var(--gap); }
 
-/* Modern selectors: one rule styles all headings */
 :is(h1, h2, h3) { line-height: 1.2; margin-top: 0; }
 h1 { font-size: var(--fs-h1); }
 :is(.section-title, .ticket-brand h2) { font-size: var(--fs-h2); }
 
-/* :where() keeps specificity at zero so components can override easily */
 :where(ul) { list-style: none; padding: 0; margin: 0; }
 
 .gradient-text {
@@ -57,7 +47,6 @@ h1 { font-size: var(--fs-h1); }
 
 .lead { color: var(--text-muted); max-width: 40rem; margin-inline: auto; }
 
-/* ---------- 3. Accessibility helpers ---------- */
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -70,13 +59,11 @@ h1 { font-size: var(--fs-h1); }
 }
 .skip-link:focus { top: 1rem; }
 
-/* Visible focus for every interactive element */
 :is(a, button, input):focus-visible {
   outline: 3px solid #ffe066;
   outline-offset: 3px;
 }
 
-/* ---------- 4. Header, nav, footer ---------- */
 .site-header {
   display: flex;
   flex-wrap: wrap;
@@ -97,7 +84,6 @@ h1 { font-size: var(--fs-h1); }
 
 .site-header nav ul { display: flex; gap: 1.25rem; }
 
-/* Links: single rule using :is() and :not() */
 :is(.site-header, .site-footer, .ticket) a:not(.btn) {
   color: var(--text);
   text-decoration: none;
@@ -113,7 +99,6 @@ h1 { font-size: var(--fs-h1); }
   border-top: 1px solid var(--glass-border);
 }
 
-/* ---------- 5. Landing page ---------- */
 .hero {
   text-align: center;
   padding-block: clamp(2rem, 8vw, 5rem);
@@ -159,7 +144,6 @@ h1 { font-size: var(--fs-h1); }
   gap: var(--gap);
 }
 
-/* Glass look shared by cards, forms and the ticket */
 :is(.card, #regForm, .ticket) {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -171,7 +155,6 @@ h1 { font-size: var(--fs-h1); }
 .card { padding: 1.5rem; transition: transform 0.3s; }
 .card:hover { transform: translateY(-6px); }
 
-/* ---------- 6. Form ---------- */
 .form-section { max-width: 34rem; margin-inline: auto; text-align: center; }
 
 #regForm { padding: var(--gap); text-align: left; }
@@ -189,16 +172,14 @@ h1 { font-size: var(--fs-h1); }
   border-radius: 0.5rem;
 }
 
-/* Highlight an invalid field using :has() on its wrapper */
 .field:has(.error:not(:empty)) input { border-color: var(--error); }
 
 .error { min-height: 1.2em; margin: 0.3rem 0 0; color: var(--error); font-size: 0.9rem; }
 
-/* ---------- 7. Ticket ---------- */
 .ticket-section { text-align: center; }
 
 .ticket {
-  position: relative;              /* anchor for the absolute serial number */
+  position: relative;              
   max-width: 32rem;
   margin: 2rem auto 0;
   padding: 2rem;
@@ -224,10 +205,10 @@ h1 { font-size: var(--fs-h1); }
   padding-top: 1.5rem;
   border-top: 1px dashed var(--glass-border);
 }
-.ticket-body::after { content: ""; display: block; clear: both; }  /* clear the float */
+.ticket-body::after { content: ""; display: block; clear: both; }  
 
 .avatar {
-  float: left;                     /* float used to place the avatar beside the text */
+  float: left;                   
   margin-right: 1.25rem;
   border-radius: 50%;
   object-fit: cover;
@@ -236,7 +217,6 @@ h1 { font-size: var(--fs-h1); }
 
 .attendee { margin: 0.5rem 0 0; font-size: 1.3rem; font-weight: 700; }
 
-/* ---------- 8. Animation ---------- */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -246,7 +226,6 @@ h1 { font-size: var(--fs-h1); }
   * { animation: none !important; transition: none !important; }
 }
 
-/* ---------- 9. Responsive ---------- */
 @media (max-width: 480px) {
   .site-header { justify-content: center; }
   .ticket { padding: 1.25rem; }

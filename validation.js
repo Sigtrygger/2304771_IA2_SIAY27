@@ -33,7 +33,7 @@ function validateForm() {
   }
 
   if (!GITHUB_PATTERN.test(github)) {
-    setError("github", "GitHub username must start with @ (e.g. @octocat).");
+    setError("github", "GitHub username must start with @ (e.g. @gmail.com).");
     valid = false;
   } else {
     setError("github", "");

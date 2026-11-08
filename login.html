@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register | Coding Conf</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="../assets/logo.svg" alt="" width="36" height="36">
+      <span>Coding Conf</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html" aria-current="page">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="form-section" aria-labelledby="reg-heading">
+      <h1 id="reg-heading">Get your <span class="gradient-text">ticket</span></h1>
+
+      <!-- novalidate: validation is handled by js/validation.js -->
+      <form id="regForm" novalidate>
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" autocomplete="name"
+                 aria-describedby="fullName-error">
+          <p class="error" id="fullName-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email ID</label>
+          <input type="email" id="email" name="email" autocomplete="email"
+                 placeholder="user@domain.com" aria-describedby="email-error">
+          <p class="error" id="email-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="github">GitHub Username</label>
+          <input type="text" id="github" name="github" placeholder="@username"
+                 aria-describedby="github-error">
+          <p class="error" id="github-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="avatar">Avatar Upload (JPEG or PNG, under 500KB)</label>
+          <input type="file" id="avatar" name="avatar" accept="image/jpeg,image/png"
+                 aria-describedby="avatar-error">
+          <p class="error" id="avatar-error" aria-live="polite"></p>
+        </div>
+        <p class="error" id="form-status" role="alert"></p>
+        <button type="submit" class="btn">Generate My Ticket</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Coding Conf. CIT2011 Web Programming IA#2.</p>
+  </footer>
+
+  <script src="../js/validation.js"></script>
+</body>
+</html>
